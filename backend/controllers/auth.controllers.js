@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-const signUp = async (req, res) => {
+import genToken from "../utils/token.js";
+export const signUp = async (req, res) => {
   try{
     const {name, mobile, email, password, role} = await req.body;
     const user = await User.findOne({email})
@@ -22,7 +23,16 @@ const signUp = async (req, res) => {
       role,
       password:hashedPassword
     })
-  } catch (error){
+    const token = await genToken(user._id)
+    res.cookie("token",token,{
+      secure:false,
+      sameSite:"strict",
+      maxAge:7*24*60*60*1000,
+      httpOnly:true
+    })
 
+    return res.status(201).json(user);
+  } catch (error){
+    return res.status(500).json(`sign up error ${error}`)
   }
 }
