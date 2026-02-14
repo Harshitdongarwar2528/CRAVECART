@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import axios from 'axios'
-
+import { serverUrl } from '../App';
 function SignUp() {
     const primaryColor = "#ff4d2d";
     const hoverColor = "#e64323";
