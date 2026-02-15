@@ -4,8 +4,8 @@ import genToken from "../utils/token.js";
 
 export const signUp = async (req, res) => {
   try {
-    const { name, mobile, email, password, role } = await req.body;
-    const user = await User.findOne({ email });
+    const { fullName, mobile, email, password, role } = await req.body;
+    let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: "User Already Exists" });
     }
@@ -22,7 +22,7 @@ export const signUp = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     user = await User.create({
-      name,
+      fullName,
       email,
       mobile,
       role,
