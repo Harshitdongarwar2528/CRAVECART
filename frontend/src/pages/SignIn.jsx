@@ -10,12 +10,14 @@ import { serverUrl } from '../App';
 function SignIn() {
   const primaryColor = "#ff4d2d";
   const hoverColor = "#e64323";
-  const bgColor = "#fff9f6";
+  const bgColor = "#fff9f6"; 
   const borderColor = "#ddd";
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+      const [err,setErr]=useState("")
+  
 
   const handleSignIn = async () => {
     try {
@@ -27,9 +29,8 @@ function SignIn() {
       // setLoading(false)
       console.log(result);
     } catch (error) {
-      // setErr(error?.response?.data?.message)
-      // setLoading(false)
-      console.log(error)
+       console.log(error?.response?.data?.message)
+
     }
   }
 

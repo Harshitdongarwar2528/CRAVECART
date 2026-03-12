@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import genToken from "../utils/token.js";
-import { sendOtpMail } from "../utils/mail.js";
+import { sendOtpMail } from "../utils/mail.js"; 
 
 export const signUp = async (req, res) => {
   try {
@@ -44,13 +44,13 @@ export const signUp = async (req, res) => {
 };
 export const signIn = async (req, res) => {
   try {
-    const { email, password } = await req.body;
+    const { email, password } =req.body;
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "User does not exists" });
-    }
+    } 
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password,user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect Password " });
     }
